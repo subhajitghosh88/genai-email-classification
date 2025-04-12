@@ -19,8 +19,14 @@ configurations {
 	}
 }
 
+configurations.all {
+	exclude group: 'commons-logging', module: 'commons-logging'
+}
+
 repositories {
 	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
 }
 
 ext {
@@ -28,12 +34,17 @@ ext {
 }
 
 dependencies {
+	implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-SNAPSHOT")
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.ai:spring-ai-pdf-document-reader'
 	implementation 'org.springframework.ai:spring-ai-tika-document-reader'
 	runtimeOnly 'com.h2database:h2'
+	implementation 'com.google.genai:google-genai:0.1.0'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0'
+	implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+	implementation 'org.glassfish.expressly:expressly:5.0.0'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
